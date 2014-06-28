@@ -1,0 +1,259 @@
+# By fzerorubigd@gmail.com
+
+set $mod Mod4
+set $mark Mod1
+set $screen1 VGA1
+set $screen0 DVI-I-1
+
+set $w0   www0
+set $w1   www1
+set $w2   files
+set $w3   mm
+set $w4   irc
+set $w5   editors
+set $w6   mail
+set $w7   develop
+set $w9   term
+set $w8   misc
+
+set $jail jail
+
+#force_xinerama yes
+# font for window titles. ISO 10646 = Unicode
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font xft:Inconsolata 10
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec urxvt
+
+# kill focused window
+bindsym $mod+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+space exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id synapse
+bindsym $mod+F1 exec --no-startup-id firefox
+bindsym $mod+Shift+F1 exec --no-startup-id chromium
+bindsym $mod+F2 exec --no-startup-id spacefm
+#bindsym $mod+Ctrl+F2 exec --no-startup-id thunar-volman-settings
+bindsym $mod+Shift+F2 exec variety -n
+bindsym $mod+x exec hexchat
+bindsym $mod+Shift+Return exec emacsclient -c
+# bindsym $mod+F3 exec deadbeef
+
+#pm-suspend is in sudoers NOPASSWORD
+bindsym $mod+F6 exec --no-startup-id ~/.i3/lockpend.sh
+bindsym $mod+t exec --no-startup-id ~/.i3/znotice.sh
+bindsym $mod+Ctrl+t exec --no-startup-id ~/.i3/nowplaying.sh
+
+bindsym $mod+F5 exec i3lock
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+J move left
+bindsym $mod+Shift+K move down
+bindsym $mod+Shift+L move up
+bindsym $mod+Shift+colon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+Shift+F fullscreen
+
+# change container layout (stacked, tabbed, default)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout default
+
+# toggle tiling / floating
+bindsym $mod+Shift+T floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+f focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioStop exec mpc stop
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioMute exec --no-startup-id "amixer -q set Master,0 toggle"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q set Master,0 5%- unmute"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q set Master,0 5%+ unmute"
+# focus the child container
+#bindcode $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $w1
+bindsym $mod+2 workspace $w2
+bindsym $mod+3 workspace $w3
+bindsym $mod+4 workspace $w4
+bindsym $mod+5 workspace $w5
+bindsym $mod+6 workspace $w6
+bindsym $mod+7 workspace $w7
+bindsym $mod+8 workspace $w8
+bindsym $mod+9 workspace $w9
+bindsym $mod+0 workspace $w0
+
+# move focused container to workspace
+bindsym $mod+Shift+exclam move workspace $w1
+bindsym $mod+Shift+at move workspace $w2
+bindsym $mod+Shift+numbersign move workspace $w3
+bindsym $mod+Shift+dollar move workspace $w4
+bindsym $mod+Shift+percent move workspace $w5
+bindsym $mod+Shift+asciicircum move workspace $w6
+bindsym $mod+Shift+ampersand move workspace $w7
+bindsym $mod+Shift+asterisk move workspace $w8
+bindsym $mod+Shift+parenleft move workspace $w9
+bindsym $mod+Shift+parenright move workspace $w0
+
+#Marker binders (Alt+Ctrl+#)
+bindsym $mark+Ctrl+exclam mark markinw1
+bindsym $mark+Ctrl+at mark markinw2
+bindsym $mark+Ctrl+numbersign mark markinw3
+bindsym $mark+Ctrl+dollar mark markinw4
+bindsym $mark+Ctrl+percent mark markinw5
+bindsym $mark+Ctrl+asciicircum mark markinw6
+bindsym $mark+Ctrl+ampersand mark markinw7
+bindsym $mark+Ctrl+asterisk mark markinw8
+bindsym $mark+Ctrl+parenleft mark markinw9
+bindsym $mark+Ctrl+parenright mark markinw10
+
+#Marker binder bring to front (Alt+#)
+bindsym $mark+1 [con_mark="markinw1"] focus
+bindsym $mark+2 [con_mark="markinw2"] focus
+bindsym $mark+3 [con_mark="markinw3"] focus
+bindsym $mark+4 [con_mark="markinw4"] focus
+bindsym $mark+5 [con_mark="markinw5"] focus
+bindsym $mark+6 [con_mark="markinw6"] focus
+bindsym $mark+7 [con_mark="markinw7"] focus
+bindsym $mark+8 [con_mark="markinw8"] focus
+bindsym $mark+9 [con_mark="markinw9"] focus
+bindsym $mark+0 [con_mark="markinw10"] focus
+
+bindsym $mod+comma  move workspace to output left
+bindsym $mod+period move workspace to output right
+# reload the configuration file
+# bindsym $mod+Shift+C reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+Q restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Ctrl+Q exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # They resize the border in the direction you pressed, e.g.
+        # when pressing left, the window is resized so that it has
+        # more space on its left
+
+bindsym j resize shrink left 10 px or 10 ppt
+bindsym Shift+J resize grow   left 10 px or 10 ppt
+
+bindsym k resize shrink down 10 px or 10 ppt
+bindsym Shift+K resize grow   down 10 px or 10 ppt
+
+bindsym l resize shrink up 10 px or 10 ppt
+bindsym Shift+L resize grow   up 10 px or 10 ppt
+
+bindsym semicolon resize shrink right 10 px or 10 ppt
+bindsym Shift+colon resize grow   right 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+bindsym Left resize shrink left 10 px or 10 ppt
+bindsym Shift+Left resize grow   left 10 px or 10 ppt
+
+bindsym Down resize shrink down 10 px or 10 ppt
+bindsym Shift+Down resize grow   down 10 px or 10 ppt
+
+bindsym Up resize shrink up 10 px or 10 ppt
+bindsym Shift+Up resize grow   up 10 px or 10 ppt
+
+bindsym Right resize shrink right 10 px or 10 ppt
+bindsym Shift+Right resize grow   right 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+bindsym Return mode "default"
+bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	status_command ~/.i3/mystatu.sh
+	mode dock
+	position top
+        font pango:Inconsolata, FontAwesome 11
+
+}
+
+workspace "$w1"   output $screen0
+workspace "$w2"   output $screen0
+workspace "$w3"   output $screen1
+workspace "$w4"   output $screen0
+workspace "$w5"   output $screen1
+workspace "$w6"   output $screen0
+workspace "$w7"   output $screen1
+workspace "$w8"   output $screen0
+workspace "$w9"   output $screen1
+workspace "$w0"   output $screen1
+
+assign [class="Chromium"]    $w0
+assign [class="Firefox"]     $w1
+assign [class="Spacefm"] 	 $w2
+assign [class="Thunderbird"] $w6
+assign [class="Geany"]		 $w5
+assign [class="Hexchat"]  	 $w4
+assign [class="Xchat"]  	 $w4
+assign [class="Vlc"]		 $w3
+assign [class="Totem"]		 $w3
+assign [class="xbmc.bin"]        $w3
+assign [class="jetbrains-phpstorm"] $w7
+assign [class="jetbrains-idea"] $w7
+assign [class="sun-awt-X11-XFramePeer"] $w7
+
+for_window [class="Guake"] floating enable
+for_window [class="URxvt"] border none
+for_window [class="Emacs"] border none
+for_window [class="Hotot-gtk3"] border none
+for_window [class="Workrave"] border none
+for_window [class="Workrave"] floating enable
+for_window [instance="Download" class="Firefox"] floating enable
+# for_window [class="Xfce4-notifyd"] border none
+for_window [class="Xfce4-notifyd"] floating enable
+for_window [class="Lazarus"] floating enable
+
+for_window [instance="dropdown_urxvt"] move to scratchpad, border 1pixel
+for_window [instance="dropdown_urxvt"] focus
+bindsym F12 [instance="dropdown_urxvt"] scratchpad show
+
+#bindsym F12 exec guake,[class="Guale"] scratchpad show
+focus_follows_mouse yes
+
+exec --no-startup-id ~/.i3/i3rc

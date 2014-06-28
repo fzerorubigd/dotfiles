@@ -1,0 +1,60 @@
+#!/bin/bash
+# Disable DPMS turning off the screen
+xset -dpms
+xset s off
+
+# Disable bell
+xset -b
+# Enable zapping (C-A-<Bksp> kills X)
+setxkbmap -option terminate:ctrl_alt_bksp
+
+# Enforce correct locales from the beginning
+unset LC_COLLATE
+export LC_CTYPE=en_US.UTF-8
+export LC_TIME=en_US.UTF-8
+export LC_NUMERIC=en_US.UTF-8
+export LC_MONETARY=en_US.UTF-8
+export LC_MESSAGES=C
+export LC_PAPER=en_US.UTF-8
+export LC_NAME=en_US.UTF-8
+export LC_ADDRESS=en_US.UTF-8
+export LC_TELEPHONE=en_US.UTF-8
+export LC_MEASUREMENT=en_US.UTF-8
+export LC_IDENTIFICATION=en_US.UTF-8
+export PATH=/sbin:/usr/sbin:$PATH
+# Use XToolkit in java applications
+export AWT_TOOLKIT=XToolkit
+export MPD_HOST=192.168.1.78
+# Set background color
+# xsetroot -solid "#333333"
+urxvtd &
+
+# Enable core dumps in case something goes wrong
+ulimit -c unlimited
+xset b off
+xset b 0 0 0
+
+#My stuffs
+sudo hdparm -B 255 /dev/sda
+sudo hdparm -S 0 /dev/sda
+clipit &
+~/bin/bingpic.sh &
+~/bin/uncaps.sh &
+#setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:scroll us,ir &
+numlockx on &
+#guake &
+#emacs --daemon &
+xmodmap -e "remove Lock = Caps_Lock"
+xmodmap -e "keycode 66 = Multi_key"
+xrdb -merge ~/.Xresources &
+# workrave &
+
+IN="HDMI1"
+EXT="VGA1"
+
+if (xrandr | grep "$EXT disconnected"); then
+    xrandr --output $IN --auto --output $EXT --off 
+else
+    xrandr --output $IN --auto --primary --output $EXT --auto --right-of $IN
+fi
+urxvtc -name dropdown_urxvt &
