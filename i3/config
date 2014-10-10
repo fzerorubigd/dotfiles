@@ -3,18 +3,18 @@
 set $mod Mod4
 set $mark Mod1
 set $screen1 VGA1
-set $screen0 DVI-I-1
+set $screen0 LVDS1
 
-set $w0   www0
-set $w1   www1
-set $w2   files
-set $w3   mm
-set $w4   irc
-set $w5   editors
-set $w6   mail
-set $w7   develop
-set $w9   term
-set $w8   misc
+set $w0  0: www0
+set $w1  1: www1
+set $w2  2: files
+set $w3  3: mm
+set $w4  4: irc
+set $w5  5: editors
+set $w6  6: mail
+set $w7  7: develop
+set $w9  9: term
+set $w8  8: misc
 
 set $jail jail
 
@@ -32,8 +32,7 @@ bindsym $mod+Return exec urxvt
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+space exec --no-startup-id dmenu_run
-bindsym $mod+d exec --no-startup-id synapse
+bindsym $mod+space exec --no-startup-id xboomx
 bindsym $mod+F1 exec --no-startup-id firefox
 bindsym $mod+Shift+F1 exec --no-startup-id chromium
 bindsym $mod+F2 exec --no-startup-id spacefm
@@ -44,7 +43,7 @@ bindsym $mod+Shift+Return exec emacsclient -c
 # bindsym $mod+F3 exec deadbeef
 
 #pm-suspend is in sudoers NOPASSWORD
-bindsym $mod+F6 exec --no-startup-id ~/.i3/lockpend.sh
+bindsym $mod+F6 exec --no-startup-id sudo pm-suspend
 bindsym $mod+t exec --no-startup-id ~/.i3/znotice.sh
 bindsym $mod+Ctrl+t exec --no-startup-id ~/.i3/nowplaying.sh
 
@@ -206,9 +205,9 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	status_command ~/.i3/mystatu.sh
+	status_command i3blocks -c ~/.i3/i3blocks.conf
 	mode dock
-	position top
+	position bottom
         font pango:Inconsolata, FontAwesome 11
 
 }
@@ -253,7 +252,6 @@ for_window [instance="dropdown_urxvt"] move to scratchpad, border 1pixel
 for_window [instance="dropdown_urxvt"] focus
 bindsym F12 [instance="dropdown_urxvt"] scratchpad show
 
-#bindsym F12 exec guake,[class="Guale"] scratchpad show
 focus_follows_mouse yes
 
 exec --no-startup-id ~/.i3/i3rc

@@ -41,7 +41,9 @@
 #define S_cyan          #2aa198
 #define S_green         #859900
 
-URxvt*background:            S_base03
+URxvt.transparent:   true
+URxvt.shading:       10
+URxvt*background:            [90]#002b36
 URxvt*foreground:            S_base0
 URxvt*fading:                40
 URxvt*fadeColor:             S_base03
@@ -82,7 +84,7 @@ URxvt*color7:                S_base2
 URxvt*color15:               S_base3
 
 
-URxvt*font: xft:Inconsolata for Powerline:size=13,xft:PowerlineSymbols:pixelsize=13:antialias=true
+URxvt*font: xft:Inconsolata for Powerline:size=14,xft:PowerlineSymbols:pixelsize=14:antialias=true
 
 URxvt*scrollBar: False
 URxvt*scrollTtyOutput: False
