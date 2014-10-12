@@ -19,5 +19,5 @@ Requirements
 * mpc && mpd 
 * hdparm (do i need this anymore?)
 * pm-suspend
-* i3-lock (may be I should change this to physlock?)
+* i3-lock (maybe I should change this to physlock?)
 
